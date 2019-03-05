@@ -1,61 +1,75 @@
 <template>
-  <div class="login">
-    <el-container>
-      <el-main>
-        <div class="form_container" style="background-color: azure">
-          <el-form :model="data" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-            <el-form-item label="帐号" prop="account">
-                <el-input v-model="data.account"></el-input>
-            </el-form-item>
-            <el-form-item label="密码" prop="password">
-              <el-input v-model="data.password" type="password"></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="submitForm('data')">登录</el-button>
-            </el-form-item>
-          </el-form>
+  <div class="row">
+    <div class="col" v-for="item in commodityList">
+      <div class="product type-product">
+        <div class="woocommerce-LoopProduct-link">
+          <div class="product-image">
+            <a href="#" class="wp-post-image">
+              <img class="image-cover" :src="item.imageCover" alt="product">
+              <img class="image-secondary" :src="item.imageSecondary" alt="product">
+            </a>
+            <div class="yith-wcwl-add-button show">
+              <a href="#" class="add_to_wishlist">
+                <i class="zmdi zmdi-favorite-outline"></i>
+              </a>
+            </div>
+            <div class="button add_to_cart_button">
+              <a href="#">
+                <img src="static/images/icons/shopping-cart-black-icon.png" alt="cart">
+              </a>
+            </div>
+            <h5 class="woocommerce-loop-product__title"><a href="#">{{item.name}}</a></h5>
+            <span class="price">
+												<del>
+													<span class="woocommerce-Price-amount amount">
+														<span class="woocommerce-Price-currencySymbol">￥</span>
+														{{item.formalPrice}}
+													</span>
+												</del>
+												<ins>
+													<span class="woocommerce-Price-amount amount">
+														<span class="woocommerce-Price-currencySymbol">￥</span>
+														{{item.price}}
+													</span>
+												</ins>
+											</span>
+          </div>
         </div>
-      </el-main>
-    </el-container>
+      </div>
+    </div>
   </div>
 </template>
 <script>
   export default {
     data() {
       return {
-        data: {
-          account: '',
-          password: ''
-        },
-        rules: {
-          account: [
-            { required: true, message: '请输入帐号', trigger: 'blur' },
-            { min: 5, max: 15, message: '长度在 5 到 15 个字符', trigger: 'blur' }
-          ],
-          password: [
-            { required: true, message: '请输入密码', trigger: 'change'}
-          ]
-        }
+        commodityList: [
+
+        ]
       };
+    },
+    mounted: function(){
+      this.submitForm('');
     },
     methods: {
       submitForm(formName) {
-		//alert("submit");
-        var formData = JSON.stringify(this.data); // 这里才是你的表单数据
- 
-          this.$http.jsonp('http://liaojianbin.top:8081/hello/sayHello', {
-			params: {},
-			jsonp: 'onBack'
-		  }).then((response) => {
-              // success callback
-              console.log(response.data);
-			  alert(response.data);
-          }, (response) => {
-               console.log("error");
-			   alert(response.data);
-			   alert(formData);
-              // error callback
-          });
+        this.$axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
+        var params = {
+          type: "0"
+        };
+        this.$axios.post(
+          '/api/commodity/getCommodityList', //url
+          JSON.stringify(params)
+        ).then(
+          res => {
+            this.commodityList = res.data.data;
+          },
+          error => {
+            console.log(error);
+            alert('系统出错QAQ');
+          }
+        )
+
       }
     }
   }

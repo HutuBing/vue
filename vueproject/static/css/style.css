@@ -1,5 +1,5 @@
 /*
-    ¸ü¶à¾«Æ·BootstrapÄ£°åÇë·ÃÎÊ£ºhttp://www.bootstrapmb.com
+    ï¿½ï¿½ï¿½à¾«Æ·BootstrapÄ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê£ï¿½http://www.bootstrapmb.com
 */
 *,.au-btn {
 	box-sizing: border-box
@@ -1484,11 +1484,11 @@ textarea:-moz-placeholder {
 }
 
 .footer-section .footer-content .footer-items.footer-items-1 {
-	padding-left: 70px
+	padding-left: 0px
 }
 
 .footer-section .footer-content .footer-items.footer-items-2 {
-	padding-left: 63px
+	padding-left: 10px
 }
 
 .footer-section .footer-content .footer-items .logo {
@@ -2149,11 +2149,13 @@ textarea:-moz-placeholder {
 .featured-hp-1 .content-area .woocommerce-LoopProduct-link .product-image .woocommerce-loop-product__title {
 	position: absolute;
 	left: 20px;
-	bottom: 52px
+	bottom: 52px;
+  font-family: å¾®è½¯é›…é»‘
 }
 
 .featured-hp-1 .content-area .woocommerce-LoopProduct-link .product-image .woocommerce-loop-product__title a:hover {
-	color: #333
+	color: #333;
+  font-family: sans-serif
 }
 
 .featured-hp-1 .content-area .woocommerce-LoopProduct-link .product-image .price {
